@@ -53,7 +53,9 @@ def ratio_sharpe(data, taux_sans_risque=0.0):
 # %% 
 # Début du programme
 plt.style.use('ggplot')
-data = get_donnees_historiques('AAPL', '2023-01-01')
+
+input_code = input("Quel code voulez-vous tester ?")
+data = get_donnees_historiques(input_code, '2023-01-01')
 
 
 # Sélectionne les colonnes 'Date', 'Close' et 'Daily Return'
