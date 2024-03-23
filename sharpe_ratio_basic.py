@@ -1,19 +1,44 @@
 import numpy as np
 
-# Example PnL data for an intraday trading strategy
-pnl_per_trade = np.array([0.002, -0.005, 0.003, 0.004, -0.002, 0.001, -0.005, 0.002, -0.004, 0.006])
+# Exemple de gains en % pour chaque trade d'une stratégie de trading
+pnl_des_trades = np.array([0.001, -0.015, 0.002, 0.001, -0.003, 0.005, -0.007, 0.001, -0.005])
 
-# Number of trades (N)
-num_trades = len(pnl_per_trade)
+# Calcul de la moyenne
+moyenne = np.mean(pnl_des_trades)
+stddev = np.std(pnl_des_trades, ddof=1)  
+"""
+ ddof=1 = sample standard deviation
+ En Python avec la bibliothèque NumPy, le paramètre ddof signifie 
+ "Delta Degrees of Freedom" (degrés de liberté ajustés).
+ Il est utilisé pour ajuster le calcul de l'écart-type dans les cas 
+ où les données représentent un échantillon plutôt qu'une 
+ population entière.
 
-# Calculate Sharpe Ratio components
-mean_pnl = np.mean(pnl_per_trade)
-std_dev_pnl = np.std(pnl_per_trade, ddof=1)  
-# ddof=1 for sample standard deviation
+Lorsque ddof est défini sur 0 (la valeur par défaut), 
+NumPy calcule l'écart-type de la population. Cela est 
+approprié lorsque vous disposez de l'ensemble des données de la population.
 
-# Calculate Sharpe Ratio
-sharpe_ratio = np.sqrt(num_trades) * (mean_pnl / std_dev_pnl)
+Lorsque ddof est défini sur 1, NumPy calcule l'écart-type 
+de l'échantillon. Cela est approprié lorsque vous disposez 
+d'un échantillon de données de la population et que vous souhaitez 
+estimer l'écart-type de l'ensemble de la population sur la base de 
+cet échantillon. L'ajustement ddof=1 est utilisé pour fournir une 
+estimation non biaisée de l'écart-type de la population, 
+en particulier pour les petites tailles d'échantillon.
 
-print(f"Mean of PnL: {mean_pnl}")
-print(f"Standard Deviation of PnL: {std_dev_pnl}")
-print(f"Sharpe Ratio: {sharpe_ratio}")
+Par exemple, si vous avez un tableau data contenant des données 
+d'échantillon, vous pouvez calculer l'écart-type de l'échantillon 
+en utilisant np.std(data, ddof=1). Cela ajustera le calcul pour 
+tenir compte du fait que les données sont un échantillon plutôt 
+que l'ensemble de la population.
+"""
+
+# Nombre de trades (N)
+nombre_de_trades = len(pnl_des_trades)
+
+# Calcul du ratio de Sharpe
+ratio_de_sharpe = np.sqrt(nombre_de_trades) * (moyenne / stddev)
+
+print(f"Moyenne des PnL: {moyenne}")
+print(f"Standard Deviation de les PnL: {stddev}")
+print(f"Ratio de Sharpe : {ratio_de_sharpe}")
