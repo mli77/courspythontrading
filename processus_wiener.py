@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 # Parameters
 initial_price = 100  # Initial stock price
 drift = 0.05  # Drift parameter (mean rate of return)
-volatility = 0.3  # Volatility parameter (standard deviation of returns)
+volatility = 0.12  # Volatility parameter (standard deviation of returns)
 num_minutes = 360  # Number of minutes to simulate
 
 # Generate Wiener process (Brownian motion)
@@ -39,7 +39,7 @@ close_prices = prices.reshape(-1, 60)[:, -1]
 # Plot 1-minute candlesticks after the 250th minute
 plt.figure(figsize=(12, 6))
 for i in range(len(open_prices)):
-    if i >= 250:  # Plot only points after the 250th minute
+    if i >= 20:  # Plot only points after the 250th minute
         plt.plot([i, i], [low_prices[i], high_prices[i]], color='black')
         plt.plot([i, i], [open_prices[i], close_prices[i]], color='red' if close_prices[i] < open_prices[i] else 'green')
 plt.title('Simulated 1-Minute Candlesticks (After 250th Minute)')
